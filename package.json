@@ -1,0 +1,22 @@
+{
+  "name": "reto-webpack",
+  "version": "0.1.0",
+  "description": "Reto webpack de Platzi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config ./webpack.config.js"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "@jjyepez",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjyepez/reto-webpack.git"
+  }
+}
