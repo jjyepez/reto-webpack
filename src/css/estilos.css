@@ -1,5 +1,38 @@
+@font-face {
+  font-family: 'firacode';
+  src: url('webfonts/firacode/FiraCode-Regular-webfont.eot');
+  src: url('webfonts/firacode/FiraCode-Regular-webfont.eot?#iefix') format('embedded-opentype') url('webfonts/firacode/FiraCode-Regular-webfont.woff') format('woff') url('webfonts/firacode/FiraCode-Regular-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'firacode';
+  src: url('webfonts/firacode/FiraCode-Medium-webfont.eot');
+  src: url('webfonts/firacode/FiraCode-Medium-webfont.eot?#iefix') format('embedded-opentype') url('webfonts/firacode/FiraCode-Medium-webfont.woff') format('woff') url('webfonts/firacode/FiraCode-Medium-webfont.ttf') format('truetype');
+  font-weight: medium;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'fira';
+  src: url('webfonts/firacode/FiraCode-Bold-webfont.eot');
+  src: url('webfonts/firacode/FiraCode-Bold-webfont.eot?#iefix') format('embedded-opentype') url('webfonts/firacode/FiraCode-Bold-webfont.woff') format('woff') url('webfonts/firacode/FiraCode-Bold-webfont.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 body {
+  margin: 0;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
   flex-directon: vertical;
-  background-color: #ddf;
+  background-color: #dbe3db;
+}
+h1,
+h2,
+h3 {
+  font-family: "firacode", monospace;
+  font-weight: normal;
+  margin: .25rem;
 }

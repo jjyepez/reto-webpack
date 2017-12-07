@@ -21,6 +21,15 @@ module.exports = {
 				use: ExtractTextPlugin.extract({
 					use: ["css-loader","less-loader"]
 				})
+			},
+			{ // -- declaro el loader y sus opciones
+				test: /\.(png|jpg|gif|ttf|eot|woff)$/,
+				use: {
+					loader: 'url-loader',
+					options: {
+						limit: 100000 // --- 100 Kb
+					}
+				} 
 			}
 		]
 	},
