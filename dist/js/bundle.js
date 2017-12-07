@@ -74,7 +74,8 @@ __webpack_require__(1);
 
 var _funciones = __webpack_require__(2);
 
-//var data
+var dataPersistente = {};
+//import data from '../dat/data.json'
 
 async function cargarJSON() {
 	await fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10').then(function (rsp) {
@@ -85,9 +86,10 @@ async function cargarJSON() {
 		return rs.data;
 	});
 }
-//import data from '../dat/data.json'
-
 cargarJSON();
+setInterval(function () {
+	cargarJSON();
+}, 60000);
 
 document.write('.');
 
@@ -95,24 +97,39 @@ var $h1 = document.createElement('h1');
 $h1.textContent = "Top 10 Cryptos";
 document.body.append($h1);
 
-var hoy = new Date();
-var hora = ('0' + hoy.getHours()).substr(-2);
-var dia = ('0' + hoy.getDate()).substr(-2);
-var mes = ['', 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][hoy.getMonth() + 1];
-var minutos = ('0' + hoy.getMinutes()).substr(-2);
+var $counter = document.createElement('div');
+$counter.classList.add('counter');
+document.body.append($counter);
 
-var fecha = 'Al ' + dia + '/' + mes + '/' + hoy.getFullYear() + ' - ' + hora + ':' + minutos;
-var $h3 = document.createElement('h3');
-$h3.classList.add('subtitulo');
-$h3.textContent = fecha;
-document.body.append($h3);
+var actualizarSubtitulo = function actualizarSubtitulo() {
+	var hoy = new Date();
+	var hora = ('0' + hoy.getHours()).substr(-2);
+	var dia = ('0' + hoy.getDate()).substr(-2);
+	var mes = ['', 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][hoy.getMonth() + 1];
+	var minutos = ('0' + hoy.getMinutes()).substr(-2);
+
+	var fecha = 'Al ' + dia + '/' + mes + '/' + hoy.getFullYear() + ' - ' + hora + ':' + minutos;
+	var $h3 = document.querySelector('.subtitulo');
+	if (!$h3) {
+		$h3 = document.createElement('h3');
+		$h3.classList.add('subtitulo');
+		document.body.append($h3);
+	}
+	$h3.textContent = fecha;
+};
 
 var inicializar = function inicializar(data) {
-	var $contenedor = document.createElement('div');
-	$contenedor.classList.add('contenedor');
-	(0, _funciones.renderToDOM)($contenedor);
 
-	console.log(data);
+	actualizarSubtitulo();
+
+	var $contenedor = document.querySelector('.contenedor');
+	if (!$contenedor) {
+		$contenedor = document.createElement('div');
+		$contenedor.classList.add('contenedor');
+		(0, _funciones.renderToDOM)($contenedor);
+	} else {
+		$contenedor.textContent = '';
+	}
 
 	data.forEach(function (el) {
 		console.log(el);
@@ -138,19 +155,30 @@ var inicializar = function inicializar(data) {
 
 		var $info = document.createElement('div');
 		$info.classList.add('info');
-		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\tUS$ ' + el.price_usd + '<br>\n\t\t\t\t<div class="rank" data-rank="' + el.rank + '">\n\t\t\t\t\t' + el.rank + '\n\t\t\t\t</div>\n\t\t\t';
+		var tendencia = '<span class=\'ini\'>\u26AB</span>';
+		if (dataPersistente[el.id]) {
+			tendencia = dataPersistente[el.id] > el.price_usd ? '<span class=\'down\'>\u25BC</span>' : dataPersistente[el.id] < el.price_usd ? '<span class=\'up\'>\u25B2</span>' : '<span class=\'eq\'>=</span>';
+		}
+		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\tUS$ ' + el.price_usd + ' ' + tendencia + '<br>\n\t\t\t\t<div class="rank" data-rank="' + el.rank + '">\n\t\t\t\t\t' + el.rank + '\n\t\t\t\t</div>\n\t\t\t';
 		$info.innerHTML = html;
 
 		(0, _funciones.renderToDOM)($info, $divInfo);
+
+		dataPersistente[el.id] = el.price_usd;
+		console.log(el.id, dataPersistente[el.id]);
 	});
-	var $boton = document.createElement('button');
-	$boton.classList.add('boton');
-	$boton.setAttribute('type', 'button');
-	$boton.textContent = "Ver toda la lista";
-	$boton.addEventListener('click', function (e) {
-		window.open('https://coinmarketcap.com/');
-	});
-	(0, _funciones.renderToDOM)($boton);
+
+	var $boton = document.querySelector('.boton');
+	if (!$boton) {
+		$boton = document.createElement('button');
+		$boton.classList.add('boton');
+		$boton.setAttribute('type', 'button');
+		$boton.textContent = "Ver toda la lista";
+		$boton.addEventListener('click', function (e) {
+			window.open('https://coinmarketcap.com/');
+		});
+		(0, _funciones.renderToDOM)($boton);
+	}
 };
 
 /***/ }),

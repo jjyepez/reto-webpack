@@ -36,8 +36,28 @@ h3 {
   font-weight: normal;
   margin: .25rem;
 }
+.counter {
+  position: absolute;
+  height: 2px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  animation: progresar 60s linear infinite;
+  background-color: #333;
+}
+@keyframes progresar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
 .subtitulo {
   margin-bottom: 1.5rem;
+}
+.contenedor {
+  max-width: 900px;
 }
 .card {
   cursor: pointer;
@@ -102,6 +122,18 @@ h3 {
 .card .rank[data-rank="3"] {
   color: #333;
   background-color: #d38d5f;
+}
+.card .ini {
+  color: lightgrey;
+}
+.card .up {
+  color: green;
+}
+.card .down {
+  color: red;
+}
+.card .eq {
+  color: #333;
 }
 .boton {
   color: #333;
