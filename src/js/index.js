@@ -13,8 +13,9 @@ const hoy = new Date()
 const hora = `0${hoy.getHours()}`.substr(-2)
 const dia = `0${hoy.getDate()}`.substr(-2)
 const mes = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][hoy.getMonth()+1]
+const minutos = `0${hoy.getMinutes()}`.substr(-2)
 
-const fecha = `Al ${dia}/${mes}/${hoy.getFullYear()} - ${hora}:${hoy.getMinutes()}`
+const fecha = `Al ${dia}/${mes}/${hoy.getFullYear()} - ${hora}:${minutos}`
 let $h3 = document.createElement('h3');
 	$h3.classList.add('subtitulo')
 	$h3.textContent = fecha;
