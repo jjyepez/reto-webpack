@@ -90,8 +90,9 @@ var hoy = new Date();
 var hora = ('0' + hoy.getHours()).substr(-2);
 var dia = ('0' + hoy.getDate()).substr(-2);
 var mes = ['', 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][hoy.getMonth() + 1];
+var minutos = ('0' + hoy.getMinutes()).substr(-2);
 
-var fecha = 'Al ' + dia + '/' + mes + '/' + hoy.getFullYear() + ' - ' + hora + ':' + hoy.getMinutes();
+var fecha = 'Al ' + dia + '/' + mes + '/' + hoy.getFullYear() + ' - ' + hora + ':' + minutos;
 var $h3 = document.createElement('h3');
 $h3.classList.add('subtitulo');
 $h3.textContent = fecha;
