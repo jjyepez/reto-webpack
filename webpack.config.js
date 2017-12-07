@@ -30,6 +30,12 @@ module.exports = {
 						limit: 100000 // --- 100 Kb
 					}
 				} 
+			},
+			{
+				test: /\.json$/,
+				use:{
+					loader: 'json-loader'
+				}
 			}
 		]
 	},

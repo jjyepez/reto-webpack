@@ -1,4 +1,5 @@
 import '../css/estilos.less'
+import data from '../dat/data.json'
 
 document.write('.')
 
@@ -11,3 +12,7 @@ const fecha = `Al ${hoy.getDate()}/${hoy.getMonth()}/${hoy.getFullYear()}`
 let $h2 = document.createElement('h2');
 	$h2.textContent = fecha;
 document.body.append($h2)
+
+data.forEach( el => {
+	console.log(el)
+})
