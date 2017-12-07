@@ -1,7 +1,20 @@
 import '../css/estilos.less'
-import data from '../dat/data.json'
+//import data from '../dat/data.json'
 
 import {renderToDOM} from './funciones.js'
+
+//var data
+
+async function cargarJSON(){
+	await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
+	.then( rsp => rsp.json() )
+	.then( rs => {
+		console.log( rs )
+		inicializar( rs )
+		return rs.data
+	})
+}
+cargarJSON();
 
 document.write('.')
 
@@ -21,10 +34,12 @@ let $h3 = document.createElement('h3');
 	$h3.textContent = fecha;
 document.body.append($h3)
 
-const inicializar = function(){
+const inicializar = function( data ){
 	const $contenedor = document.createElement('div')
 		$contenedor.classList.add('contenedor')
 	renderToDOM($contenedor)
+
+console.log( data )
 
 	data.forEach( el => {
 		console.log(el)
@@ -71,4 +86,3 @@ const inicializar = function(){
 		})
 	renderToDOM($boton)
 }
-inicializar()
