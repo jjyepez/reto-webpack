@@ -102,6 +102,17 @@ var inicializar = function inicializar() {
 		var $card = document.createElement('div');
 		$card.classList.add('card');
 		(0, _funciones.renderToDOM)($card, $contenedor);
+
+		var $img = document.createElement('img');
+		$img.setAttribute('src', 'https://files.coinmarketcap.com/static/img/coins/64x64/' + el.id + '.png');
+		(0, _funciones.renderToDOM)($img, $card);
+
+		var $info = document.createElement('div');
+		$info.classList.add('info');
+		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\t' + el.price_usd + '<br>\n\t\t\t';
+		$info.innerHTML = html;
+
+		(0, _funciones.renderToDOM)($info, $card);
 	});
 };
 inicializar();

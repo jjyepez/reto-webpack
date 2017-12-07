@@ -25,6 +25,21 @@ const inicializar = function(){
 		const $card = document.createElement('div')
 			$card.classList.add('card')
 		renderToDOM($card, $contenedor)
+
+		const $img = document.createElement('img')
+			$img.setAttribute('src',`https://files.coinmarketcap.com/static/img/coins/64x64/${el.id}.png`)
+		renderToDOM( $img, $card )
+
+		const $info = document.createElement('div')
+			$info.classList.add('info')
+			const html = `
+				<b>${el.name}</b><br>
+				${el.symbol}<br>
+				${el.price_usd}<br>
+			`
+			$info.innerHTML = html
+
+		renderToDOM( $info, $card )
 	})
 }
 inicializar()

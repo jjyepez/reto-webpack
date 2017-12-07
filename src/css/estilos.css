@@ -44,3 +44,6 @@ h3 {
   margin: .5rem;
   float: left;
 }
+.info {
+  font-family: "firacode", monospace;
+}
