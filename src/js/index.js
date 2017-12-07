@@ -14,7 +14,7 @@ async function cargarJSON(){
 		return rs.data
 	})
 }
-cargarJSON();
+cargarJSON()
 
 document.write('.')
 

@@ -72,7 +72,7 @@
 
 __webpack_require__(1);
 
-var _funciones = __webpack_require__(3);
+var _funciones = __webpack_require__(2);
 
 //var data
 
@@ -160,8 +160,7 @@ var inicializar = function inicializar(data) {
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */,
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
