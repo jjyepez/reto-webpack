@@ -87,10 +87,15 @@ $h1.textContent = "Top 10 Cryptos";
 document.body.append($h1);
 
 var hoy = new Date();
-var fecha = 'Al ' + hoy.getDate() + '/' + hoy.getMonth() + '/' + hoy.getFullYear();
-var $h2 = document.createElement('h2');
-$h2.textContent = fecha;
-document.body.append($h2);
+var hora = ('0' + hoy.getHours()).substr(-2);
+var dia = ('0' + hoy.getDate()).substr(-2);
+var mes = ['', 'ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'][hoy.getMonth() + 1];
+
+var fecha = 'Al ' + dia + '/' + mes + '/' + hoy.getFullYear() + ' - ' + hora + ':' + hoy.getMinutes();
+var $h3 = document.createElement('h3');
+$h3.classList.add('subtitulo');
+$h3.textContent = fecha;
+document.body.append($h3);
 
 var inicializar = function inicializar() {
 	var $contenedor = document.createElement('div');
@@ -101,19 +106,39 @@ var inicializar = function inicializar() {
 		console.log(el);
 		var $card = document.createElement('div');
 		$card.classList.add('card');
+		$card.addEventListener('click', function (e) {
+			window.open('https://coinmarketcap.com/currencies/' + el.id);
+		});
 		(0, _funciones.renderToDOM)($card, $contenedor);
 
+		var $divImg = document.createElement('div');
+		$divImg.classList.add('div-img');
+		(0, _funciones.renderToDOM)($divImg, $card);
+
 		var $img = document.createElement('img');
+		$img.classList.add('img');
 		$img.setAttribute('src', 'https://files.coinmarketcap.com/static/img/coins/64x64/' + el.id + '.png');
-		(0, _funciones.renderToDOM)($img, $card);
+		(0, _funciones.renderToDOM)($img, $divImg);
+
+		var $divInfo = document.createElement('div');
+		$divInfo.classList.add('div-info');
+		(0, _funciones.renderToDOM)($divInfo, $card);
 
 		var $info = document.createElement('div');
 		$info.classList.add('info');
-		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\t' + el.price_usd + '<br>\n\t\t\t';
+		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\tUS$ ' + el.price_usd + '<br>\n\t\t\t\t<div class="rank" data-rank="' + el.rank + '">\n\t\t\t\t\t' + el.rank + '\n\t\t\t\t</div>\n\t\t\t';
 		$info.innerHTML = html;
 
-		(0, _funciones.renderToDOM)($info, $card);
+		(0, _funciones.renderToDOM)($info, $divInfo);
 	});
+	var $boton = document.createElement('button');
+	$boton.classList.add('boton');
+	$boton.setAttribute('type', 'button');
+	$boton.textContent = "Ver toda la lista";
+	$boton.addEventListener('click', function (e) {
+		window.open('https://coinmarketcap.com/');
+	});
+	(0, _funciones.renderToDOM)($boton);
 };
 inicializar();
 
