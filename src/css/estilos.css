@@ -127,4 +127,8 @@ h3 {
     width: 80%;
     margin-left: 10%;
   }
+  .card .img {
+    width: 35%;
+    height: 35%;
+  }
 }
