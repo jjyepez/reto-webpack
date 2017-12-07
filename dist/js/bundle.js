@@ -95,11 +95,11 @@ document.write('.');
 
 var $h1 = document.createElement('h1');
 $h1.textContent = "Top 10 Cryptos";
-document.body.append($h1);
+(0, _funciones.renderToDOM)($h1);
 
 var $counter = document.createElement('div');
 $counter.classList.add('counter');
-document.body.append($counter);
+(0, _funciones.renderToDOM)($counter);
 
 var actualizarSubtitulo = function actualizarSubtitulo() {
 	var hoy = new Date();
@@ -113,7 +113,12 @@ var actualizarSubtitulo = function actualizarSubtitulo() {
 	if (!$h3) {
 		$h3 = document.createElement('h3');
 		$h3.classList.add('subtitulo');
-		document.body.append($h3);
+		(0, _funciones.renderToDOM)($h3);
+
+		var $pie = document.createElement('span');
+		$pie.classList.add('info-update');
+		$pie.innerHTML = 'Los datos se actualizan cada 60 seg. desde <a target="_blank" href="https://coinmarketcap.com">coinmarketcap.com</a>';
+		(0, _funciones.renderToDOM)($pie);
 	}
 	$h3.textContent = fecha;
 };

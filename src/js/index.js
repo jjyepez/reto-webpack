@@ -24,12 +24,11 @@ document.write('.')
 
 let $h1 = document.createElement('h1');
 	$h1.textContent = "Top 10 Cryptos";
-document.body.append($h1)
+renderToDOM($h1)
 
 let $counter = document.createElement('div');
 	$counter.classList.add('counter')
-document.body.append($counter)
-
+renderToDOM($counter)
 
 const actualizarSubtitulo = () => {
 	const hoy = new Date()	
@@ -43,7 +42,12 @@ const actualizarSubtitulo = () => {
 	if( !$h3 ){
 		$h3 = document.createElement('h3');
 		$h3.classList.add('subtitulo')
-		document.body.append($h3)
+		renderToDOM($h3)
+
+		let $pie = document.createElement('span')
+			$pie.classList.add('info-update')
+			$pie.innerHTML = `Los datos se actualizan cada 60 seg. desde <a target="_blank" href="https://coinmarketcap.com">coinmarketcap.com</a>`
+		renderToDOM($pie)
 	}
 	$h3.textContent = fecha;
 }
