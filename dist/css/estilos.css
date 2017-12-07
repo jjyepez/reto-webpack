@@ -36,3 +36,11 @@ h3 {
   font-weight: normal;
   margin: .25rem;
 }
+.card {
+  min-width: 10rem;
+  min-height: 15rem;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  margin: .5rem;
+  float: left;
+}
