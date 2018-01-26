@@ -77,6 +77,12 @@ var _funciones = __webpack_require__(2);
 var dataPersistente = {};
 //import data from '../dat/data.json'
 
+var formatoMiles = function formatoMiles(c) {
+	return String(c).split('').reverse().join('').replace(/(\d{3})/g, function (r) {
+		return r + '.';
+	}).split('').reverse().join('').replace(/^\./, '');
+};
+
 async function cargarJSON() {
 	await fetch('https://api.coinmarketcap.com/v1/ticker/?limit=10').then(function (rsp) {
 		return rsp.json();
@@ -164,7 +170,7 @@ var inicializar = function inicializar(data) {
 		if (dataPersistente[el.id]) {
 			tendencia = dataPersistente[el.id] > el.price_usd ? '<span class=\'down\'>\u25BC</span>' : dataPersistente[el.id] < el.price_usd ? '<span class=\'up\'>\u25B2</span>' : '<span class=\'eq\'>=</span>';
 		}
-		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\tUS$ ' + el.price_usd + ' ' + tendencia + '<br>\n\t\t\t\t<div class="rank" data-rank="' + el.rank + '">\n\t\t\t\t\t' + el.rank + '\n\t\t\t\t</div>\n\t\t\t';
+		var html = '\n\t\t\t\t<b>' + el.name + '</b><br>\n\t\t\t\t' + el.symbol + '<br>\n\t\t\t\tUS$ ' + el.price_usd.replace(/\./g, ',') + ' ' + tendencia + '<br>\n\t\t\t\t<div class="mc">\n\t\t\t\t\tMC ~$' + formatoMiles(~~(el.market_cap_usd / 1000000)) + ' MM\n\t\t\t\t</div>\n\t\t\t\t<div class="rank" data-rank="' + el.rank + '">\n\t\t\t\t\t' + el.rank + '\n\t\t\t\t</div>\n\t\t\t';
 		$info.innerHTML = html;
 
 		(0, _funciones.renderToDOM)($info, $divInfo);

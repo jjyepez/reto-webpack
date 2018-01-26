@@ -5,6 +5,16 @@ import {renderToDOM} from './funciones.js'
 
 var dataPersistente = {}
 
+const formatoMiles = c => (
+	String(c)
+		.split('').reverse().join('')
+		.replace(/(\d{3})/g, r => {
+  		return r+'.'
+		})
+		.split('').reverse().join('')
+		.replace(/^\./,'')
+)
+
 async function cargarJSON(){
 	await fetch(`https://api.coinmarketcap.com/v1/ticker/?limit=10`)
 	.then( rsp => rsp.json() )
@@ -31,7 +41,7 @@ let $counter = document.createElement('div');
 renderToDOM($counter)
 
 const actualizarSubtitulo = () => {
-	const hoy = new Date()	
+	const hoy = new Date()
 	const hora = `0${hoy.getHours()}`.substr(-2)
 	const dia = `0${hoy.getDate()}`.substr(-2)
 	const mes = ['','ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][hoy.getMonth()+1]
@@ -92,15 +102,18 @@ const inicializar = data => {
 			let tendencia = `<span class='ini'>⚫</span>`
 			if( dataPersistente[el.id] ){
 				tendencia = dataPersistente[el.id] > el.price_usd ?
-						  `<span class='down'>▼</span>` : 
+						  `<span class='down'>▼</span>` :
 						  dataPersistente[el.id] < el.price_usd ?
 						  `<span class='up'>▲</span>` :
-						  `<span class='eq'>=</span>` 
+						  `<span class='eq'>=</span>`
 			}
 			const html = `
 				<b>${el.name}</b><br>
 				${el.symbol}<br>
-				US$ ${el.price_usd} ${tendencia}<br>
+				US$ ${el.price_usd.replace(/\./g,',')} ${tendencia}<br>
+				<div class="mc">
+					MC ~\$${formatoMiles(~~(el.market_cap_usd/1000000))} MM
+				</div>
 				<div class="rank" data-rank="${el.rank}">
 					${el.rank}
 				</div>
