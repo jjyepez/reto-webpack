@@ -157,7 +157,7 @@ var inicializar = function inicializar(data) {
 
 		var $img = document.createElement('img');
 		$img.classList.add('img');
-		$img.setAttribute('src', 'https://files.coinmarketcap.com/static/img/coins/64x64/' + el.id + '.png');
+		$img.setAttribute('src', 'https://noesishosting.com/cdn/img/crypto/' + el.symbol + '.png');
 		(0, _funciones.renderToDOM)($img, $divImg);
 
 		var $divInfo = document.createElement('div');
