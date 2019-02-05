@@ -95,6 +95,7 @@ h3 {
   position: relative;
   text-align: left;
   padding: 1.25rem 1rem 1rem 1rem;
+  font-size: 0.7rem;
 }
 .card .rank {
   text-align: center;
